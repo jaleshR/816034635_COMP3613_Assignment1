@@ -70,8 +70,8 @@ app.cli.add_command(test)
 
 # wsgi.py
 
-from App.controllers.competition import CompetitionController
-from App.controllers.result import ResultController
+from App.controllers.competition import create_competition, get_competitions, get_competition_results
+from App.controllers.result import import_results
 from flask.cli import AppGroup
 import click
 
