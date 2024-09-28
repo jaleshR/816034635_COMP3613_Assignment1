@@ -62,13 +62,3 @@ flask competition import_results competition_results.csv 1
 ```
 
 ---
-
-## 5. View Help for All CLI Commands
-Command:
-```bash
-flask --help
-```
-Description:  
-Lists all available CLI commands with descriptions.
-
----
