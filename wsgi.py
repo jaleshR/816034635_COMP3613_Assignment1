@@ -67,3 +67,46 @@ def user_tests_command(type):
     
 
 app.cli.add_command(test)
+
+# wsgi.py
+
+from App.controllers.competition import CompetitionController
+from App.controllers.result import ResultController
+from flask.cli import AppGroup
+import click
+
+competition_cli = AppGroup('competition')
+
+@competition_cli.command('create')
+@click.argument('name')
+@click.argument('description')
+@click.argument('date')
+def create_new_competition(name, description, date):
+    competition = create_competition(name, description, date)
+    click.echo(f"Competition '{competition.name}' created successfully.")
+
+@competition_cli.command('list')
+def list_competitions():
+    competitions = get_competitions()
+    for competition in competitions:
+        click.echo(f"ID: {competition.id}, Name: {competition.name}, Date: {competition.date}")
+
+@competition_cli.command('results')
+@click.argument('competition_id')
+def view_competition_results(competition_id):
+    results = get_competition_results(competition_id)
+    if results:
+        for result in results:
+            click.echo(f"User ID: {result.user_id}, Score: {result.score}, Rank: {result.ranking}")
+    else:
+        click.echo(f"No results found for competition ID {competition_id}")
+
+@competition_cli.command('import_results')
+@click.argument('file_path')
+@click.argument('competition_id')
+def import_competition_results(file_path, competition_id):
+    import_results(file_path, competition_id)
+    click.echo(f"Results imported for competition ID {competition_id}")
+
+# Register the CLI group with Flask's command line interface
+app.cli.add_command(competition_cli)
