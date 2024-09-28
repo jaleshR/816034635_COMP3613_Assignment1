@@ -1,4 +1,3 @@
-# App/models/competition.py
 
 from App.database import db
 
