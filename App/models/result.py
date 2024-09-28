@@ -1,4 +1,5 @@
-# App/models/result.py
+
+from App.database import db
 
 class Result(db.Model):
     id = db.Column(db.Integer, primary_key=True)
