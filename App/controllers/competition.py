@@ -1,4 +1,3 @@
-# App/controllers/competition.py
 
 from datetime import datetime
 from App.models.competition import Competition
